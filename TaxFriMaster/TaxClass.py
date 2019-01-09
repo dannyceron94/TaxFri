@@ -4,9 +4,7 @@ updated on Dec 24,2018
 
 @author: DANNY CERON
 '''
-from pip._vendor.requests.certs import where
-from test.test_io import MisbehavedRawIO
-from sre_parse import CATEGORIES
+
 #my imports
 import csv
 class TaxClass(object):
@@ -29,22 +27,17 @@ class TaxClass(object):
     
 #____________________________END_OF_ARRAYS___________________________________
     #constructor
-    def __init__(self):
-        self.name = None
-        self.birthday= None
-        self.ID= None#probably not needed
+    def __init__(self,name = None,birth_data= None, id = None):
+        self.name = name
+        self.birthday= birth_data
+        self.ID= id#probably not needed
         self.item_name= None
-        self.item_price= None
+        self.item_price= None# I dont think I need this here.
         self.fileName = "infoData.csv"
      
-    """Menu selection""" 
-    def menu(self):
-        print("""
-         1)Check Item list
-         2)Add item
-         3)Delete item
-         4)Format Data
-        """)  
+    def __str__(self):
+         return "TaxClass "
+     
     #checks if the file exist
     def checkFile(self):
         checked = False
@@ -58,20 +51,10 @@ class TaxClass(object):
             print("Creating new data\n")
         return checked     
         
-    def askInfo(self):
-        
-        name = input("Please enter your name: ")
-        date = input("Now enter your birth data")
-           
-        self.createFile(name, date)
-        
-        
     """creates a csv file with that info
         @param: name, birth-date
         @"""
-    def createFile(self, name, birthdate):
-        self.name = name
-        self.birthday = birthdate
+    def createFile(self):
 
         with open(self.fileName ,"w+") as csvfile:
             writer = csv.writer(csvfile)
@@ -102,26 +85,48 @@ class TaxClass(object):
             price = float(input("\bPlease enter the price of the item(example $0.00): $"))
             if type(price) == float:
                 isPrice = True
-               
-        return item,price
+        
+        for index,cat in enumerate(self.LISTOFCATEGORY):
+            print("\n", index+1, cat)
+            
+        where = int(input("pick items category: "))-1
+                   
+        return item,price,where
     
    #this needs a lot fixing the way data is going to be save is in process. 
     """this adds a new item to the chosen array
            @param: itemName
            @return true if item in any of the arrays, false otherwise"""
            #there is no method overloading on python just method overriding 
-    def saveItem(self,itemName = None,itemPrice = None, itemCategory = None):
-        
-        if itemPrice == None and itemName == None and itemCategory== None:
-            item,price = self.AskForItem()
-            for index,cat in enumerate(self.LISTOFCATEGORY):
-                print("\n", index+1, cat)
-                
-            where = int(input("pick items category: "))-1
-            
-            category = self.LISTOFCATEGORY[where]
-            #here we pushed the data into a excel file
-            
-            #self.ALLARRAY[where].append()
+#     def saveItem(self,itemName = None,itemPrice = None, itemCategory = None, date = None):
+#         
+#         if itemPrice == None and itemName == None and itemCategory== None:
+#             item,price = self.AskForItem()
+#             for index,cat in enumerate(self.LISTOFCATEGORY):
+#                 print("\n", index+1, cat)
+#                 
+#             where = int(input("pick items category: "))-1
+#             
+#             category = self.LISTOFCATEGORY[where]
+#             #here we pushed the data into a excel file
+#             with open(self.fileName,"a") as csvfile:
+#                 writer = csv.writer(csvfile)
+#                 writer.writerow([where,,,,])
+#             #self.ALLARRAY[where].append()
 
-        
+
+    """This method adds all information to the csv file
+        @param: itemName,itemPrice, itemCategory, date, note.
+        @Returns true if it was succesfull
+    """
+    def add_item(self,itemName = None,itemPrice = None, itemCategory = None, 
+                      date = None, note =None):
+        r_value = False
+        if self.checkFile():
+            with open(self.fileName,"a") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow([itemCategory,date,itemName,itemPrice,note])
+                r_value = True
+                
+        return r_value
+    
