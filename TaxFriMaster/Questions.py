@@ -3,6 +3,7 @@ Created on Jan 8, 2019
 
 @author: DANNY
 '''
+from ctypes.wintypes import DOUBLE
 class Questions(object):
     
     def string_question(self, question):
@@ -22,4 +23,7 @@ class Questions(object):
         while(response not in ("y","n")):
             response = input(question).lower()
         return response
-    
+    def price_question(self, question):
+        response = None
+        #we need a exception
+        return DOUBLE(input(question))
