@@ -1,10 +1,7 @@
-import User
-import Menu
+from menu import menu
 
-# user1 = User.User(name = "Danny", Birthday="June 29, 94")
-# 
-# print(user1)
-# 
-user2 = Menu.Menu()
+#main
 
-user2.on_the_main()
+user_uno = menu()
+user_uno.new_user()
+#note: when adding an a line to the csv file, it is skipping a line

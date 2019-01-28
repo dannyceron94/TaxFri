@@ -91,7 +91,7 @@ class TaxClass(object):
             
         where = int(input("pick items category: "))-1
                    
-        return item,price,where
+        return item,price,self.LISTOFCATEGORY[where]
     
    #this needs a lot fixing the way data is going to be save is in process. 
     """this adds a new item to the chosen array

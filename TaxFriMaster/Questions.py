@@ -13,9 +13,10 @@ class Questions(object):
         #this might need an exception 
         return int(input(question))
     def number_in_between(self,question,low,high):
+        #we might need an exception
         response = None
         while(response not in range(low,high)):
-            response = input(question)
+            response = int(input(question))
             
         return response
     def yes_no_question(self,question):
@@ -27,3 +28,5 @@ class Questions(object):
         response = None
         #we need a exception
         return DOUBLE(input(question))
+
+        
