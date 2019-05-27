@@ -56,11 +56,12 @@ class TaxClass(object):
         @"""
     def createFile(self):
 
-        with open(self.fileName ,"w+") as csvfile:
+        with open(self.fileName ,"w+",newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(["Full name","Birth date"])
             writer.writerow([self.name,self.birthday])
             writer.writerow(["Category","Date","Item name","Price","Notes"])
+            
     
     """this check if the item already exist in the arrays
            @param: itemName
@@ -122,11 +123,16 @@ class TaxClass(object):
     def add_item(self,itemName = None,itemPrice = None, itemCategory = None, 
                       date = None, note =None):
         r_value = False
-        if self.checkFile():
-            with open(self.fileName,"a") as csvfile:
+        if self.checkFile():            
+            with open(self.fileName,"a",newline='') as csvfile:#Add newline='' to not get an extra empty line.
                 writer = csv.writer(csvfile)
                 writer.writerow([itemCategory,date,itemName,itemPrice,note])
-                r_value = True
+            r_value = True
                 
         return r_value
     
+    def readData(self):
+        with open(self.fileName)as csvfile:
+            csv_reader = csv.reader(csvfile)
+            for row in csv_reader:
+                print(row)

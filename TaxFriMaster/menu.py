@@ -2,6 +2,7 @@
 created on Jan 26 2019
 @author: DANNY CERON
  """
+import os
 from User import User
 from Questions import Questions
 from DateClass import DateClass
@@ -24,18 +25,22 @@ class menu(User):
             
         elif(checker == True):
             while(user_input != 0):
-                
                 user_input = self.menu_display()
-                if(user_input == 1):
-                    print("figuring out a date structure for it")
-                elif(user_input == 2):
+                if(user_input == 1):# check list
+                    main_user.readData()
+                elif(user_input == 2):# add items
                     item, price, category = main_user.AskForItem()
-                    
                     main_user.add_item(item, price, category, item_date.__str__(), note = None)
+                elif(user_input==3):# delete item
+                    print("something")
+                #elif(user_input == 4):# user info
+                else:
+                    print("really need something here? wow")
         else:
             print("Something went wrong!")
     def menu_display(self):
         questions = Questions()
+        os.system('cls')#only clears screen on windows terminal
         print("""
         
         1) Check list
