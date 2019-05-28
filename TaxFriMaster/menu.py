@@ -32,10 +32,10 @@ class menu(User):
                     item, price, category = main_user.AskForItem()
                     main_user.add_item(item, price, category, item_date.__str__(), note = None)
                 elif(user_input==3):# delete item
-                    print("something")
-                #elif(user_input == 4):# user info
-                else:
-                    print("really need something here? wow")
+                    print("This is more complex than I expected")
+                elif(user_input == 4):# user info
+                    main_user.userInfo()# For now just print...later have it return maybe in an 
+                
         else:
             print("Something went wrong!")
     def menu_display(self):
@@ -50,6 +50,6 @@ class menu(User):
         0)quit
         
         """)
-        input = questions.number_in_between("Enter number choice: ",0,4)
+        input = questions.number_in_between("Enter number choice: ",0,5)
         return input
             

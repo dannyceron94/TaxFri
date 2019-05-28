@@ -7,6 +7,7 @@ updated on Dec 24,2018
 
 #my imports
 import csv
+from _csv import Dialect, get_dialect
 class TaxClass(object):
 #____________________________ITEMS_ARRAYS___________________________________    
 #     OFFICEITEMS =["book", "books","pencil", "pencils","pen",
@@ -134,5 +135,17 @@ class TaxClass(object):
     def readData(self):
         with open(self.fileName)as csvfile:
             csv_reader = csv.reader(csvfile)
+            next(csv_reader)
+            next(csv_reader)
+            
             for row in csv_reader:
+                
                 print(row)
+                
+    def userInfo(self):
+        with open(self.fileName) as csvfile:
+            csv_reader = csv.reader(csvfile)
+            #use next to access iterator
+            print(next(csv_reader))#prints 1st line
+            print(next(csv_reader))#prints 2nd line
+            
