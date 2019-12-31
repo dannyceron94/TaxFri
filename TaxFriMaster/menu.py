@@ -2,12 +2,10 @@
 created on Jan 26 2019
 @author: DANNY CERON
  """
-import os
 from User import User
 from Questions import Questions
 from DateClass import DateClass
 class menu(User):
-    
     
     def new_user(self):
         
@@ -25,22 +23,18 @@ class menu(User):
             
         elif(checker == True):
             while(user_input != 0):
-                user_input = self.menu_display()
-                if(user_input == 1):# check list
-                    main_user.readData()
-                elif(user_input == 2):# add items
-                    item, price, category = main_user.AskForItem()
-                    main_user.add_item(item, price, category, item_date.__str__(), note = None)
-                elif(user_input==3):# delete item
-                    print("This is more complex than I expected")
-                elif(user_input == 4):# user info
-                    main_user.userInfo()# For now just print...later have it return maybe in an 
                 
+                user_input = self.menu_display()
+                if(user_input == 1):
+                    print("figuring out a date structure for it")
+                elif(user_input == 2):
+                    item, price, category = main_user.AskForItem()
+                    
+                    main_user.add_item(item, price, category, item_date.__str__(), note = None)
         else:
             print("Something went wrong!")
     def menu_display(self):
         questions = Questions()
-        os.system('cls')#only clears screen on windows terminal
         print("""
         
         1) Check list
@@ -50,6 +44,6 @@ class menu(User):
         0)quit
         
         """)
-        input = questions.number_in_between("Enter number choice: ",0,5)
+        input = questions.number_in_between("Enter number choice: ",0,4)
         return input
             
