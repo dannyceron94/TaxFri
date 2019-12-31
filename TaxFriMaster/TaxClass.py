@@ -141,6 +141,8 @@ class TaxClass(object):
             for row in csv_reader:
                 
                 print(row)
+
+        input("\nPress enter to continue")
                 
     def userInfo(self):
         with open(self.fileName) as csvfile:
