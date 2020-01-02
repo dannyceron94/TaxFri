@@ -133,6 +133,7 @@ class TaxClass(object):
         return r_value
     
     def readData(self):
+        #there is no need to close the reader
         with open(self.fileName)as csvfile:
             csv_reader = csv.reader(csvfile)
             next(csv_reader)
@@ -141,10 +142,9 @@ class TaxClass(object):
             for row in csv_reader:
                 
                 print(row)
-
-        input("\nPress enter to continue")
                 
     def userInfo(self):
+        print("here")
         with open(self.fileName) as csvfile:
             csv_reader = csv.reader(csvfile)
             #use next to access iterator

@@ -15,8 +15,12 @@ class Questions(object):
     def number_in_between(self,question,low,high):
         #we might need an exception
         response = None
-        while(response not in range(low,high)):
+        # while(response not in range(low,high+1)):#+1 to include the highest number as well
+        try:
             response = int(input(question))
+        except ValueError:
+            print("you tried to input an invalid value")
+            input("\n\npress enter to continue")
             
         return response
     def yes_no_question(self,question):
