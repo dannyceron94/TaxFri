@@ -8,6 +8,8 @@ updated on Dec 24,2018
 #my imports
 import csv
 from _csv import Dialect, get_dialect
+from Questions import Questions
+import pandas as pd
 class TaxClass(object):
 #____________________________ITEMS_ARRAYS___________________________________    
 #     OFFICEITEMS =["book", "books","pencil", "pencils","pen",
@@ -61,7 +63,7 @@ class TaxClass(object):
             writer = csv.writer(csvfile)
             writer.writerow(["Full name","Birth date"])
             writer.writerow([self.name,self.birthday])
-            writer.writerow(["Category","Date","Item name","Price","Notes"])
+            writer.writerow(["Category","Date","Item's name","Price","Notes","Notes","Receipt number","store number"])
             
     
     """this check if the item already exist in the arrays
@@ -129,8 +131,14 @@ class TaxClass(object):
                 writer = csv.writer(csvfile)
                 writer.writerow([itemCategory,date,itemName,itemPrice,note])
             r_value = True
-                
         return r_value
+
+    def add_store_receipt(self,receiptNo,storeNum):
+        with open(self.fileName,'a',newline='') as csvfile:
+            csv_writer = csv.writer(csvfile)
+            csv_writer.writerow(["","","",
+            "","","",receiptNo,storeNum])
+
     
     def readData(self):
         #there is no need to close the reader
@@ -138,16 +146,33 @@ class TaxClass(object):
             csv_reader = csv.reader(csvfile)
             next(csv_reader)
             next(csv_reader)
-            
-            for row in csv_reader:
+            total = 0
+            for index, row in enumerate(csv_reader):
                 
-                print(row)
+                print("item: ",index,row)
+                total = index
+        return total
                 
+
     def userInfo(self):
-        print("here")
+        
         with open(self.fileName) as csvfile:
             csv_reader = csv.reader(csvfile)
             #use next to access iterator
             print(next(csv_reader))#prints 1st line
             print(next(csv_reader))#prints 2nd line
+
+    #have not found an optimal way to do this.
+    def deleteItem(self):
+        question = Questions()
+        maxRange = self.readData()
+        itemToDelete = question.number_in_between("Select the item you wish to delete: ",1,maxRange)
+        #Opening file to access data.
+        #data = pd.read_csv(self.fileName, error_bad_lines=False)
+        #print(itemToDelete)
+        #data = data.drop([itemToDelete+2], axis=0)
+        
             
+        #testing if the item works
+        
+        input("item deleted \n\nPress enter to continue")
