@@ -35,14 +35,7 @@ class menu(User):
                     main_user.readData()
                     input("\nPress enter to continue")
                 elif(user_input == 2):
-                    receipt = input("Enter receipt number\n")
-                    store = input("Enter store name and number\n")
-                    if(receipt == NULL and store == NULL):
-                        main_user.add_store_receipt("N/A","N/A")
-
-                    item, price, category = main_user.AskForItem()
-                    
-                    main_user.add_item(item, price, category, item_date.__str__(), note = None)
+                    main_user.add_transaction()                
                     #add the total
                 elif(user_input == 3):
                     main_user.deleteItem()

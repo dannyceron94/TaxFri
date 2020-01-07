@@ -133,8 +133,28 @@ class TaxClass(object):
             r_value = True
         return r_value
 
+    def add_transaction(self):
+        recNo = input("enter the receipt Number (optional)")
+        storeNo = input("enter the store Number (optional)")
+        numberOfItems = int(input("Enter number of items:"))
+        if(recNo is None and storeNo is None):
+            self.add_store_receipt("NA","NA")
+        else:
+            self.add_store_receipt(recNo,storeNo)
+
+        if(numberOfItems>1):
+            for index in range(numberOfItems):
+                item, price, category = self.AskForItem()
+                self.add_item(item, price, category, "", note = None)
+        elif numberOfItems==1:#might need the ()
+            item, price, category = self.AskForItem()
+            self.add_item(item, price, category, "", note = None)
+        else:
+            print("Invalid input")
+        
+
     def add_store_receipt(self,receiptNo,storeNum):
-        with open(self.fileName,'a',newline='') as csvfile:
+        with open(self.fileName,"a",newline='') as csvfile:
             csv_writer = csv.writer(csvfile)
             csv_writer.writerow(["","","",
             "","","",receiptNo,storeNum])
@@ -148,9 +168,9 @@ class TaxClass(object):
             next(csv_reader)
             total = 0
             for index, row in enumerate(csv_reader):
-                
                 print("item: ",index,row)
                 total = index
+
         return total
                 
 
@@ -172,7 +192,6 @@ class TaxClass(object):
         #print(itemToDelete)
         #data = data.drop([itemToDelete+2], axis=0)
         
-            
         #testing if the item works
         
         input("item deleted \n\nPress enter to continue")
