@@ -3,7 +3,7 @@ Created on Jan 8, 2019
 
 @author: DANNY
 '''
-from ctypes.wintypes import DOUBLE
+# from ctypes.wintypes import DOUBLE
 class Questions(object):
     
     def string_question(self, question):

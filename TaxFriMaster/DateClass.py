@@ -10,6 +10,7 @@ from _datetime import date
 class DateClass(object):
     
     def __init__(self, month =None,Day=None,year =None):
+
         self.month = month
         self.Day = Day
         self.year = year
@@ -32,16 +33,22 @@ class DateClass(object):
             return date.today().month
         else:
             return self.month
+    def set_month(self,new_month):
+        self.month = new_month
     
     def get_day(self):
         if(self.Day == None):
             return date.today().day
         else:
             return self.Day
+    def set_dat(self,new_day):
+        self.Day = new_day
     
     def get_year(self):
         if(self.year == None):
             return date.today().year
         else:
             return self.year
+    def set_year(self,new_year):
+        self.year = new_year
     

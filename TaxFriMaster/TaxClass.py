@@ -9,7 +9,8 @@ updated on Dec 24,2018
 import csv
 from _csv import Dialect, get_dialect
 from Questions import Questions
-import pandas as pd
+from DateClass import  DateClass
+# import pandas as pd
 class TaxClass(object):
 #____________________________ITEMS_ARRAYS___________________________________    
 #     OFFICEITEMS =["book", "books","pencil", "pencils","pen",
@@ -63,7 +64,7 @@ class TaxClass(object):
             writer = csv.writer(csvfile)
             writer.writerow(["Full name","Birth date"])
             writer.writerow([self.name,self.birthday])
-            writer.writerow(["Category","Date","Item's name","Price","Notes","Notes","Receipt number","store number"])
+            writer.writerow(["Category","Date","Item's name","Price","Notes","Receipt number","store number"])
             
     
     """this check if the item already exist in the arrays
@@ -80,11 +81,12 @@ class TaxClass(object):
     """this asks the user to submit an item
            @param: itemName
            @return true if item in any of the arrays, false otherwise"""
-    def AskForItem(self):
+#Needs fixing. App crashes if category is out of bound.
+    def AskForItem(self,message):
         item  = ""
         isPrice = False
         while(item == ""):
-            item = input("\nInput Item name:")  
+            item = input("\n"+message)  
         while(isPrice == False):
             price = float(input("\bPlease enter the price of the item(example $0.00): $"))
             if type(price) == float:
@@ -144,13 +146,24 @@ class TaxClass(object):
 
         if(numberOfItems>1):
             for index in range(numberOfItems):
-                item, price, category = self.AskForItem()
-                self.add_item(item, price, category, "", note = None)
+                message = "Enter Item "+str(index+1)+": "
+                item, price, category = self.AskForItem(message)
+                item_date = self.date()
+                self.add_item(item, price, category, item_date, note = None)
         elif numberOfItems==1:#might need the ()
-            item, price, category = self.AskForItem()
-            self.add_item(item, price, category, "", note = None)
+            item, price, category = self.AskForItem("Enter item: ")
+            item_date = self.date()
+            self.add_item(item, price, category, item_date, note = None)
         else:
             print("Invalid input")
+
+    def date(self):
+        transaction_date = DateClass()
+        change_date = input("1) Today's date\n 2) Edit Date")
+        if(change_date=="2"):
+            new_month = input("Enter month(ex: 0)")
+            transaction_date.set_month(new_month)
+        return transaction_date
         
 
     def add_store_receipt(self,receiptNo,storeNum):
@@ -168,7 +181,7 @@ class TaxClass(object):
             next(csv_reader)
             total = 0
             for index, row in enumerate(csv_reader):
-                print("item: ",index,row)
+                print(row)
                 total = index
 
         return total
