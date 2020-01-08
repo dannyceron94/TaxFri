@@ -50,10 +50,10 @@ class menu(User):
         print("""
         
         1) Check list
-        2)Add item
-        3)Delete item
-        4)User info
-        0)quit
+        2) Add item
+        3) Delete item
+        4) User info
+        0) Quit
         
         """)
         input = questions.number_in_between("Enter number choice: ",0,4)
