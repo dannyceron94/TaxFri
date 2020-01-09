@@ -174,7 +174,7 @@ class TaxClass(object):
         with open(self.fileName,"a",newline='') as csvfile:
             csv_writer = csv.writer(csvfile)
             csv_writer.writerow(["","","",
-            "","","",receiptNo,storeNum])
+            "","",receiptNo,storeNum])
 
     
     def readData(self):
