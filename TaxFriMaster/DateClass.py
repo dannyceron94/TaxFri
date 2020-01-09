@@ -21,9 +21,11 @@ class DateClass(object):
     def __str__(self):
         if(self.Day==None  and self.month == None and self.year == None):
                                             #covets date to a string
-            return datetime.datetime.today().isoformat()
+            # return datetime.datetime.today().isoformat()
+            return datetime.datetime.today().strftime("%Y/%m/%d")
+
         else:
-            return self.month + self.Day + self.year
+            return self.year + "/" + self.month + "/" + self.Day
         
         
     
@@ -41,7 +43,7 @@ class DateClass(object):
             return date.today().day
         else:
             return self.Day
-    def set_dat(self,new_day):
+    def set_day(self,new_day):
         self.Day = new_day
     
     def get_year(self):

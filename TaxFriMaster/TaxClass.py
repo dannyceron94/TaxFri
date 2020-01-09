@@ -159,10 +159,14 @@ class TaxClass(object):
 
     def date(self):
         transaction_date = DateClass()
-        change_date = input("1) Today's date\n 2) Edit Date")
+        change_date = input("1) Today's date\n2) Edit Date")
         if(change_date=="2"):
-            new_month = input("Enter month(ex: 0)")
+            new_month = input("Enter month(ex: 01): ")
+            new_day   = input("Enter day(ex: 01): ")
+            new_year  = input("Enter year(ex: 2000): ")
             transaction_date.set_month(new_month)
+            transaction_date.set_day(new_day)
+            transaction_date.set_year(new_year)
         return transaction_date
         
 
