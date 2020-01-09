@@ -39,12 +39,13 @@ class menu(User):
                     #add the total
                 elif(user_input == 3):
                     main_user.deleteItem()
-
+ 
                 elif(user_input == 4):
                     main_user.userInfo()
                     input("\nPress enter to continue")
         else:
             print("Something went wrong!")
+
     def menu_display(self):
         questions = Questions()
         print("""
@@ -58,4 +59,3 @@ class menu(User):
         """)
         input = questions.number_in_between("Enter number choice: ",0,4)
         return input
-            

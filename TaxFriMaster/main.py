@@ -1,4 +1,4 @@
-from menu import menu
+from Menu import menu
 
 #main
 
