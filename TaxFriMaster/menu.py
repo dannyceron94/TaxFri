@@ -43,8 +43,12 @@ class menu(User):
                 elif(user_input == 4):
                     main_user.userInfo()
                     input("\nPress enter to continue")
+                elif(user_input == 5):
+                    #rounding decimal points to two
+                    print("total expenses: ",round(main_user.total_expenses(),2))
+                    input("\nPress enter to continue")
         else:
-            print("Something went wrong!")
+            print("Invalid input")
 
     def menu_display(self):
         questions = Questions()
@@ -54,8 +58,9 @@ class menu(User):
         2) Add item
         3) Delete item
         4) User info
+        5) Current Total
         0) Quit
         
         """)
-        input = questions.number_in_between("Enter number choice: ",0,4)
+        input = questions.number_in_between("Enter number choice: ",0,5)
         return input
