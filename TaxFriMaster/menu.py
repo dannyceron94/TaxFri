@@ -38,12 +38,9 @@ class menu(User):
                     main_user.add_transaction()                
                     #add the total
                 elif(user_input == 3):
-                    main_user.deleteItem()
- 
-                elif(user_input == 4):
                     main_user.userInfo()
                     input("\nPress enter to continue")
-                elif(user_input == 5):
+                elif(user_input == 4):
                     #rounding decimal points to two
                     print("total expenses: ",round(main_user.total_expenses(),2))
                     input("\nPress enter to continue")
@@ -56,9 +53,8 @@ class menu(User):
         
         1) Check list
         2) Add item
-        3) Delete item
-        4) User info
-        5) Current Total
+        3) User info
+        4) Current Total
         0) Quit
         
         """)
