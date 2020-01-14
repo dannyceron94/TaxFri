@@ -13,17 +13,6 @@ from DateClass import  DateClass
 # import pandas as pd
 class TaxClass(object):
 #____________________________ITEMS_ARRAYS___________________________________    
-#     OFFICEITEMS =["book", "books","pencil", "pencils","pen",
-#                   "pens","notebook", "notebooks"]
-#     HARDWAREITEMS = []
-#     MISCELLANEOUS = []#for random items
-#     testr = []
-#     LISTOFITEMS = []#saves user data
-#    
-# #Dictionary
-#     ALLARRAY = {"office supply":OFFICEITEMS,"Hardware supply":HARDWAREITEMS,
-#                 "Miscellaneous":MISCELLANEOUS,"office supply":testr}
-#     #more items can be added
 
     """List of all categories, if possible make the user add more category"""
     LISTOFCATEGORY = ["Office supply","Hardware supply","Electronics","Groceries",
@@ -38,7 +27,8 @@ class TaxClass(object):
         self.item_name= None
         self.item_price= None# I dont think I need this here.
         self.fileName = "infoData.csv"
-     
+
+    #task class does not return anything
     def __str__(self):
          return "TaxClass "
      
@@ -98,27 +88,6 @@ class TaxClass(object):
         where = int(input("pick items category: "))-1
                    
         return item,price,self.LISTOFCATEGORY[where]
-    
-   #this needs a lot fixing the way data is going to be save is in process. 
-    """this adds a new item to the chosen array
-           @param: itemName
-           @return true if item in any of the arrays, false otherwise"""
-           #there is no method overloading on python just method overriding 
-#     def saveItem(self,itemName = None,itemPrice = None, itemCategory = None, date = None):
-#         
-#         if itemPrice == None and itemName == None and itemCategory== None:
-#             item,price = self.AskForItem()
-#             for index,cat in enumerate(self.LISTOFCATEGORY):
-#                 print("\n", index+1, cat)
-#                 
-#             where = int(input("pick items category: "))-1
-#             
-#             category = self.LISTOFCATEGORY[where]
-#             #here we pushed the data into a excel file
-#             with open(self.fileName,"a") as csvfile:
-#                 writer = csv.writer(csvfile)
-#                 writer.writerow([where,,,,])
-#             #self.ALLARRAY[where].append()
 
 
     """This method adds all information to the csv file
@@ -169,13 +138,11 @@ class TaxClass(object):
             transaction_date.set_year(new_year)
         return transaction_date
         
-
     def add_store_receipt(self,receiptNo,storeNum):
         with open(self.fileName,"a",newline='') as csvfile:
             csv_writer = csv.writer(csvfile)
             csv_writer.writerow(["","","",
             "","",receiptNo,storeNum])
-
     
     def readData(self):
         #there is no need to close the reader
@@ -188,8 +155,7 @@ class TaxClass(object):
                 print(row)
                 total = index
 
-        return total
-                
+        return total   
 
     def userInfo(self):
         
@@ -212,3 +178,13 @@ class TaxClass(object):
         #testing if the item works
         
         input("item deleted \n\nPress enter to continue")
+
+    def total_expenses(self):
+        with open(self.fileName,"r") as cvsfile:
+            cvs_reader = csv.reader(cvsfile, delimiter=',', quotechar='"')
+            total_ex = 0
+            for row in cvs_reader:
+                if (len(row)>4):
+                    if(row[3] !='' and row[3] !="Price"):
+                        total_ex = total_ex+ float(row[3])
+        return total_ex
